@@ -109,3 +109,15 @@ PRODUCT_LOCALES += hdpi
 
 PRODUCT_NAME := full_inc
 PRODUCT_DEVICE := inc
+
+# Goo Manager support
+# Goo Manager support
+ifeq ($(CM_BUILDTYPE),UNOFFICIAL)
+    CM_BUILDTYPE := PONS
+    CMVERSION := $(PRODUCT_VERSION_MAJOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)-$(CM_BUILD)$(CM_EXTRAVERSION)
+    PRODUCT_PROPERTY_OVERRIDES += \
+      ro.modversion=CyanogenMod-$(CMVERSION) \
+      ro.goo.developerid=PonsAsinorem \
+      ro.goo.rom=CM$(PRODUCT_VERSION_MAJOR)$(CM_BUILDTYPE)$(CM_BUILD) \
+      ro.goo.version=$(shell date +%s)
+endif
