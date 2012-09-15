@@ -101,9 +101,37 @@ $(call inherit-product-if-exists, vendor/htc/inc/inc-vendor.mk)
 
 # stuff common to all HTC phones
 $(call inherit-product, device/htc/common/common.mk)
+##########Temp fix till NL language gets updated for some open commits
+#$(call inherit-product, build/target/product/full_base.mk)
+PRODUCT_PACKAGES := \
+    OpenWnn \
+    PinyinIME \
+    VoiceDialer \
+    libWnnEngDic \
+    libWnnJpnDic \
+    libwnndict
 
-$(call inherit-product, build/target/product/full_base.mk)
+# Additional settings used in all AOSP builds
+PRODUCT_PROPERTY_OVERRIDES := \
+    keyguard.no_require_sim=true
 
+# Put en_US first in the list, to make it default.
+PRODUCT_LOCALES := en_US
+
+# Pick up some sounds - stick with the short list to save space
+# on smaller devices.
+$(call inherit-product-if-exists, frameworks/base/data/sounds/OriginalAudio.mk)
+
+# Get the TTS language packs
+$(call inherit-product-if-exists, external/svox/pico/lang/all_pico_languages.mk)
+
+# Get the list of languages.
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+# Grab the smaller language till NL gets fixed
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_small.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
+##########
 # Incredible uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
 
