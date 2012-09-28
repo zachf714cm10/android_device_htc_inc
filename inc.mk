@@ -111,7 +111,6 @@ PRODUCT_NAME := full_inc
 PRODUCT_DEVICE := inc
 
 # Goo Manager support
-# Goo Manager support
 ifeq ($(CM_BUILDTYPE),UNOFFICIAL)
     CM_BUILDTYPE := PONS
     CMVERSION := $(PRODUCT_VERSION_MAJOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)-$(CM_BUILD)$(CM_EXTRAVERSION)
