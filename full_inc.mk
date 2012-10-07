@@ -136,13 +136,13 @@ PRODUCT_MODEL := ADR6300
 PRODUCT_MANUFACTURER := HTC
 
 # Goo Manager support
-CM_BUILDTYPE := PONS
-CM_VERSION := $(PRODUCT_VERSION_MAJOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)-$(CM_BUILD)$(CM_EXTRAVERSION)
-PRODUCT_PROPERTY_OVERRIDES += \
-ro.modversion=CyanogenMod-$(CMVERSION) \
-ro.goo.developerid=PonsAsinorem \
-ro.goo.rom=CM$(PRODUCT_VERSION_MAJOR)$(CM_BUILDTYPE)$(CM_BUILD) \
-ro.goo.version=$(shell date +%s)
+ifeq ($(AOKP_BUILD),)
+	PRODUCT_PROPERTY_OVERRIDES += \
+		ro.aokp.version=$(TARGET_PRODUCT)_PONS_$(DATE)
+        ro.goo.developerid=PonsAsinorem \
+        ro.goo.rom=AOKPONS$(TARGET_PRODUCT) \
+        ro.goo.version=$(shell date +%s)
+endif
 
 PRODUCT_COPY_FILES +=  \
-    vendor/cm/proprietary/GooManager.apk:system/app/GooManager.apk
+    vendor/aokp/prebuilt/common/app/GooManager.apk:system/app/GooManager.apk
